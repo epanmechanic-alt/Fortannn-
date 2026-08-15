@@ -1,0 +1,294 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #090305;
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
+
+#loading-screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #2b0a12 0%,
+            #14060a 45%,
+            #090305 100%
+        );
+
+    z-index: 9999;
+}
+
+
+/* =====================================================
+   ISI LOADING
+===================================================== */
+
+.loading-content {
+    width: 90%;
+    max-width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   HATI
+===================================================== */
+
+.heart {
+    font-size: 65px;
+
+    margin-bottom: 25px;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255, 50, 90, 0.7))
+        drop-shadow(0 0 25px rgba(255, 30, 70, 0.4));
+
+    animation:
+        heartAppear 1.2s ease forwards,
+        heartbeat 1.5s ease-in-out 1.2s infinite;
+}
+
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.loading-content h1 {
+    font-size: 32px;
+
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    margin-bottom: 12px;
+
+    opacity: 0;
+
+    animation:
+        textAppear 1s ease 1.8s forwards;
+}
+
+
+/* =====================================================
+   TEKS
+===================================================== */
+
+.loading-content p {
+    font-size: 15px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    animation:
+        textAppear 1s ease 2.3s forwards;
+}
+
+
+/* =====================================================
+   GARIS LOADING
+===================================================== */
+
+.loading-line {
+    width: 180px;
+    height: 2px;
+
+    margin-top: 28px;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-radius: 10px;
+
+    opacity: 0;
+
+    animation:
+        lineAppear 0.8s ease 2.7s forwards;
+}
+
+
+.loading-progress {
+    width: 0%;
+    height: 100%;
+
+    background: #ff4d6d;
+
+    box-shadow:
+        0 0 8px rgba(255, 77, 109, 0.8);
+
+    animation:
+        loadingProgress 3s ease-in-out 2.8s forwards;
+}
+
+
+/* =====================================================
+   ANIMASI HATI MUNCUL
+===================================================== */
+
+@keyframes heartAppear {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* =====================================================
+   ANIMASI DETAK HATI
+===================================================== */
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.12);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.08);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =====================================================
+   ANIMASI TEKS
+===================================================== */
+
+@keyframes textAppear {
+
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   ANIMASI GARIS
+===================================================== */
+
+@keyframes lineAppear {
+
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+@keyframes loadingProgress {
+
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* =====================================================
+   HP PORTRAIT
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .heart {
+        font-size: 58px;
+    }
+
+    .loading-content h1 {
+        font-size: 28px;
+    }
+
+    .loading-content p {
+        font-size: 14px;
+    }
+
+    .loading-line {
+        width: 160px;
+    }
+}
