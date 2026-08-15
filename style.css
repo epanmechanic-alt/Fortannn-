@@ -17,10 +17,14 @@ body {
     width: 100%;
     min-height: 100vh;
 
-    background: #090305;
-    color: white;
+    background: #050507;
+    color: #ffffff;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
     overflow: hidden;
 }
@@ -32,11 +36,10 @@ body {
 
 #loading-screen {
     position: fixed;
-
     inset: 0;
 
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
 
     display: flex;
     align-items: center;
@@ -44,200 +47,373 @@ body {
 
     background:
         radial-gradient(
-            circle at center,
-            #2b0a12 0%,
-            #14060a 45%,
-            #090305 100%
+            circle at 50% 45%,
+            rgba(125, 20, 50, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            #16070d 0%,
+            #090408 45%,
+            #040405 100%
         );
 
     z-index: 9999;
+
+    overflow: hidden;
 }
 
 
 /* =====================================================
-   ISI LOADING
+   GLOW BESAR DI BELAKANG
+===================================================== */
+
+#loading-screen::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 35, 90, 0.08);
+
+    filter: blur(70px);
+
+    animation: ambientGlow 4s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   GARIS DEKORASI
+===================================================== */
+
+#loading-screen::after {
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+    height: 120px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255, 255, 255, 0.12),
+            transparent
+        );
+
+    top: 0;
+    left: 50%;
+
+    opacity: 0;
+
+    animation: lineReveal 2s ease 0.5s forwards;
+}
+
+
+/* =====================================================
+   CONTENT
 ===================================================== */
 
 .loading-content {
+    position: relative;
+
     width: 90%;
-    max-width: 400px;
+    max-width: 420px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
     text-align: center;
+
+    z-index: 2;
 }
 
 
 /* =====================================================
-   HATI
+   HEART
 ===================================================== */
 
 .heart {
-    font-size: 65px;
+    position: relative;
 
-    margin-bottom: 25px;
+    width: 92px;
+    height: 92px;
 
-    filter:
-        drop-shadow(0 0 8px rgba(255, 50, 90, 0.7))
-        drop-shadow(0 0 25px rgba(255, 30, 70, 0.4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 54px;
+
+    margin-bottom: 28px;
+
+    opacity: 0;
 
     animation:
-        heartAppear 1.2s ease forwards,
-        heartbeat 1.5s ease-in-out 1.2s infinite;
+        heartAppear 1.2s cubic-bezier(.16, 1, .3, 1) forwards,
+        heartbeat 2.2s ease-in-out 1.4s infinite;
+}
+
+
+/* lingkaran glow */
+
+.heart::before {
+    content: "";
+
+    position: absolute;
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 45, 95, 0.18),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    z-index: -1;
+}
+
+
+/* ring */
+
+.heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 82px;
+    height: 82px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 50%;
+
+    animation: ringPulse 2.2s ease-in-out 1.4s infinite;
 }
 
 
 /* =====================================================
-   JUDUL
+   TITLE
 ===================================================== */
 
 .loading-content h1 {
-    font-size: 32px;
+    font-size: clamp(32px, 9vw, 46px);
 
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 500;
 
-    margin-bottom: 12px;
+    letter-spacing: 5px;
+
+    line-height: 1;
+
+    margin-bottom: 18px;
 
     opacity: 0;
 
+    background:
+        linear-gradient(
+            120deg,
+            #ffffff,
+            #ffcbd7,
+            #ffffff
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
     animation:
-        textAppear 1s ease 1.8s forwards;
+        textAppear 1.2s cubic-bezier(.16, 1, .3, 1) 1s forwards;
 }
 
 
 /* =====================================================
-   TEKS
+   SUBTITLE
 ===================================================== */
 
 .loading-content p {
-    font-size: 15px;
+    max-width: 320px;
 
-    color: rgba(255, 255, 255, 0.65);
+    font-size: 13px;
 
-    letter-spacing: 1px;
+    font-weight: 300;
+
+    letter-spacing: 2px;
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, 0.5);
 
     opacity: 0;
 
     animation:
-        textAppear 1s ease 2.3s forwards;
+        textAppear 1.2s cubic-bezier(.16, 1, .3, 1) 1.4s forwards;
 }
 
 
 /* =====================================================
-   GARIS LOADING
+   LOADING AREA
 ===================================================== */
 
 .loading-line {
-    width: 180px;
-    height: 2px;
+    position: relative;
 
-    margin-top: 28px;
+    width: 170px;
+    height: 1px;
+
+    margin-top: 35px;
+
+    background: rgba(255, 255, 255, 0.1);
 
     overflow: hidden;
-
-    background: rgba(255, 255, 255, 0.12);
-
-    border-radius: 10px;
 
     opacity: 0;
 
     animation:
-        lineAppear 0.8s ease 2.7s forwards;
-}
-
-
-.loading-progress {
-    width: 0%;
-    height: 100%;
-
-    background: #ff4d6d;
-
-    box-shadow:
-        0 0 8px rgba(255, 77, 109, 0.8);
-
-    animation:
-        loadingProgress 3s ease-in-out 2.8s forwards;
+        lineAppear 1s ease 1.8s forwards;
 }
 
 
 /* =====================================================
-   ANIMASI HATI MUNCUL
+   PROGRESS
+===================================================== */
+
+.loading-progress {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff4d78,
+            #ffffff,
+            #ff4d78
+        );
+
+    box-shadow:
+        0 0 8px rgba(255, 60, 110, 0.8);
+
+    animation:
+        loadingProgress 4s cubic-bezier(.4, 0, .2, 1) 2s forwards;
+}
+
+
+/* =====================================================
+   ANIMASI HEART MUNCUL
 ===================================================== */
 
 @keyframes heartAppear {
 
     0% {
         opacity: 0;
-        transform: scale(0.3);
+        transform: scale(0.4);
+        filter: blur(8px);
     }
 
     60% {
         opacity: 1;
-        transform: scale(1.15);
+        transform: scale(1.12);
+        filter: blur(0);
     }
 
     100% {
         opacity: 1;
         transform: scale(1);
+        filter: blur(0);
     }
 }
 
 
 /* =====================================================
-   ANIMASI DETAK HATI
+   DETAK
 ===================================================== */
 
 @keyframes heartbeat {
 
-    0% {
+    0%,
+    100% {
         transform: scale(1);
     }
 
-    15% {
-        transform: scale(1.12);
-    }
-
-    30% {
-        transform: scale(1);
-    }
-
-    45% {
+    12% {
         transform: scale(1.08);
     }
 
-    60% {
+    24% {
         transform: scale(1);
     }
 
-    100% {
+    36% {
+        transform: scale(1.05);
+    }
+
+    48% {
         transform: scale(1);
     }
 }
 
 
 /* =====================================================
-   ANIMASI TEKS
+   RING
+===================================================== */
+
+@keyframes ringPulse {
+
+    0% {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.35;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+}
+
+
+/* =====================================================
+   TEXT APPEAR
 ===================================================== */
 
 @keyframes textAppear {
 
     0% {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(18px);
+        filter: blur(5px);
     }
 
     100% {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
     }
 }
 
 
 /* =====================================================
-   ANIMASI GARIS
+   LINE APPEAR
 ===================================================== */
 
 @keyframes lineAppear {
@@ -271,24 +447,77 @@ body {
 
 
 /* =====================================================
-   HP PORTRAIT
+   AMBIENT GLOW
+===================================================== */
+
+@keyframes ambientGlow {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   VERTICAL LINE
+===================================================== */
+
+@keyframes lineReveal {
+
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+
+/* =====================================================
+   HP
 ===================================================== */
 
 @media (max-width: 480px) {
 
     .heart {
-        font-size: 58px;
+        width: 82px;
+        height: 82px;
+
+        font-size: 48px;
+
+        margin-bottom: 25px;
+    }
+
+    .heart::before {
+        width: 70px;
+        height: 70px;
+    }
+
+    .heart::after {
+        width: 74px;
+        height: 74px;
     }
 
     .loading-content h1 {
-        font-size: 28px;
+        letter-spacing: 4px;
     }
 
     .loading-content p {
-        font-size: 14px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
     }
 
     .loading-line {
-        width: 160px;
+        width: 150px;
     }
 }
