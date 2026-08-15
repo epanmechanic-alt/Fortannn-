@@ -1,42 +1,273 @@
-*
-	border: 0
-	box-sizing: border-box
-	margin: 0
-	padding: 0
+/* =========================================
+   RESET
+========================================= */
 
-$hue: 223
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-\:root
-	--bg: #{hsl($hue,10%,30%)}
-	--fg: #{hsl($hue,10%,90%)}
-	--fg-t: #{hsla($hue,10%,90%,0.5)}
-	--primary1: #{hsl($hue,90%,55%)}
-	--primary2: #{hsl($hue,90%,65%)}
-	--trans-dur: 0.3s
-	font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320))
 
-body
-	background:
-		color: var(--bg)
-		image: linear-gradient(135deg,hsla(0,0%,0%,0),hsla(0,0%,0%,0.2))
-	color: var(--fg)
-	font: 1em/1.5 "Varela Round", Helvetica, sans-serif
-	height: 100vh
-	min-height: 360px
-	display: grid
-	place-items: center
-	transition: background-color var(--trans-dur), color var(--trans-dur)
+/* =========================================
+   BODY
+========================================= */
 
-.pl
-	box-shadow: 2em 0 2em hsla(0,0%,0%,0.2) inset, -2em 0 2em hsla(0,0%,100%,0.1) inset
-	display: flex
-	justify-content: center
-	align-items: center
-	position: relative
-	letter-spacing: 0.1em
-	text-transform: uppercase
-	transform: rotateX(30deg) rotateZ(45deg)
-	width: 15em
-	height: 15em
-	&,
-	&__dot
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #050505;
+    color: #ffffff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   LOADING SCREEN
+========================================= */
+
+#loading-screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #171717 0%,
+            #0b0b0b 40%,
+            #050505 75%
+        );
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+
+/* =========================================
+   EFEK CAHAYA BACKGROUND
+========================================= */
+
+#loading-screen::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    filter: blur(80px);
+
+    animation: ambientGlow 4s ease-in-out infinite;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.loading-content {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+#countdown {
+    width: 180px;
+    height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 100px;
+
+    font-weight: 200;
+
+    letter-spacing: -5px;
+
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.025),
+        inset 0 0 40px rgba(255, 255, 255, 0.015);
+
+    animation: countdownPulse 1s ease-in-out infinite;
+}
+
+
+/* =========================================
+   TEKS
+========================================= */
+
+#loading-text {
+    margin-top: 30px;
+
+    font-size: 13px;
+
+    font-weight: 300;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================
+   TOMBOL START
+========================================= */
+
+#start-button {
+    display: none;
+
+    margin-top: 35px;
+
+    padding: 13px 42px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================================
+   HOVER START
+========================================= */
+
+#start-button:hover {
+    background: rgba(255, 255, 255, 0.14);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 30px rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================
+   ACTIVE START
+========================================= */
+
+#start-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   ANIMASI BACKGROUND
+========================================= */
+
+@keyframes ambientGlow {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+
+/* =========================================
+   ANIMASI COUNTDOWN
+========================================= */
+
+@keyframes countdownPulse {
+
+    0% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+
+    50% {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+}
+
+
+/* =========================================
+   HP
+========================================= */
+
+@media (max-width: 480px) {
+
+    #countdown {
+        width: 150px;
+        height: 150px;
+
+        font-size: 82px;
+    }
+
+    #loading-text {
+        font-size: 12px;
+
+        letter-spacing: 1.5px;
+    }
+
+    #start-button {
+        padding: 12px 36px;
+    }
+}
